@@ -1,0 +1,77 @@
+<mat-card *ngIf='!isPayedUser && isLoading'>
+  <mat-spinner style="margin:0 auto;" mode="indeterminate" diameter="30"></mat-spinner>
+</mat-card>
+
+<mat-card *ngIf='!isPayedUser && !isLoading'>
+  <h3 style='font-size: 16px;' class="text-center">Unlock more features by subscribing to our premium plans!</h3>
+  <div class='features'>
+    <ul>
+      <li>Unlimited private channels.</li>
+      <li>Unlimited video streaming.</li>
+      <li>Unlimited video uploads.</li>
+      <li>Manage your streams and videos on our new creator space.</li>
+    </ul>
+  </div>
+  <div class="text-center">
+    <button mat-button [routerLink]="['/pricing']">Read More</button>
+  </div>
+</mat-card>
+
+<mat-card class='row' *ngIf='isPayedUser && !isLoading'>
+  <div class="half text-center" *ngIf='!progress' (click)="startLiveStream()" mdbWavesEffect>
+    <div class="row justify-content-center">
+      <h5>
+        <mat-icon>live_tv</mat-icon>
+      </h5>
+    </div>
+    <div class="row justify-content-center">
+      <h6>
+        <span>{{ chatService.isScreenSharing ? 'Cancel Live' : 'Go Live' }}</span>
+      </h6>
+    </div>
+  </div>
+
+  <div class="half spererator text-center" *ngIf='!progress' (click)="toggleMute()" mdbWavesEffect>
+    <div class="row justify-content-center">
+      <h5>
+        <mat-icon>{{ chatService.isMuted ? 'mic' : 'mic_off' }}</mat-icon>
+      </h5>
+    </div>
+    <div class="row justify-content-center">
+      <h6>
+        <span>{{ chatService.isMuted ? ('Unmute') : ('Mute') }}</span>
+      </h6>
+    </div>
+  </div>
+
+  <div class="half spererator text-center" *ngIf='!progress' (click)="uploadStream()" mdbWavesEffect>
+    <div class="row justify-content-center">
+      <h5>
+        <mat-icon>cloud_upload</mat-icon>
+      </h5>
+    </div>
+    <div class="row justify-content-center">
+      <h6>
+        <span>Upload</span>
+      </h6>
+    </div>
+  </div>
+
+  <div class="half spererator text-center" *ngIf='!progress' (click)="downloadStream()" mdbWavesEffect>
+    <div class="row justify-content-center">
+      <h5>
+        <mat-icon>save</mat-icon>
+      </h5>
+    </div>
+    <div class="row justify-content-center">
+      <h6>
+        <span>Download</span>
+      </h6>
+    </div>
+  </div>
+</mat-card>
+
+<div *ngFor="let item of videopartService.videos">
+  <app-video-part-item [videoPart]="item">
+  </app-video-part-item>
+</div>

@@ -1,0 +1,54 @@
+<div class="app-attachment-content row col-sm-12">
+    <div>
+        <button type="button" (click)="toggleAttachment()" mdbBtn color="primary" rounded="true"
+            class="app-message-attachment-btn" mdbWavesEffect>
+            <mat-icon>attachment</mat-icon>
+        </button>
+    </div>
+    <div style="margin-left: 6px;">
+        <button type="button" (click)="toggleGiphySearch()" mdbBtn color="primary" rounded="true"
+            class="app-message-attachment-btn" mdbWavesEffect>
+            <mat-icon>gif</mat-icon>
+        </button>
+    </div>
+    <div style="margin-left: 6px;">
+        <button type="button" (click)="toggleEmojiPicker()" mdbBtn color="primary" rounded="true"
+            class="app-message-attachment-btn" mdbWavesEffect>
+            <mat-icon>sentiment_very_satisfied</mat-icon>
+        </button>
+    </div>
+</div>
+
+<div class="row col-sm-12">
+    <div *ngIf="showGiphySearch" class="giphy-search">
+        <form (ngSubmit)="searchGiphy()">
+            <input type="text" placeholder="Search for a GIF" name="giphy" [(ngModel)]="giphySearchTerm">
+        </form>
+        <ul class="search-results">
+            <li class="gif-result" *ngFor="let result of giphyResults">
+                <img src="{{ result.images.downsized_large.url }}"
+                    (click)="sendGif(result.title, result.images.original.url)">
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="showEmojiPicker">
+        <emoji-mart set="emojione" (emojiSelect)="addEmoji($event)" title="Pick your emoji…">
+        </emoji-mart>
+    </div>
+
+    <div *ngIf="showAttachment" class="form-group">
+        <label for="file">Choose File</label><br />
+        <input type="file" id="file" (change)="handleFileInput($event.target.files)">
+    </div>
+
+</div>
+
+<div class="app-chat-input md-form md-outline">
+    <textarea [(ngModel)]="chatMessage" name="chatMessage"
+        class="md-textarea form-control app-mesage-input-content thin" rows="2" id="input_text" type="text"
+        placeholder="Type a message..." length="250" (keyup.enter)="sendMessage()" mdbCharCounter mdbInput></textarea>
+    <button type="button" (click)="sendMessage()" mdbBtn color="primary" class="app-message-send-btn" mdbWavesEffect>
+        <mat-icon>send</mat-icon>
+    </button>
+</div>

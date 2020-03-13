@@ -1,0 +1,93 @@
+<div class="app-videos-content-holder">
+  <div class="md-form app-video-search-bar sticky row">
+    <input type="search" class='col-6' [(ngModel)]="searchTitle" placeholder="Search videos">
+    <!-- <button mat-button>
+      <mat-icon style='color: #FFF' (click)='showMoreOptions()'>arrow_drop_down</mat-icon>
+    </button> -->
+
+    <input type="file" #fileInput (change)='uploadVideo($event)' accept="video/*" class='hide'>
+    <mat-card class='row app-videos-buttons-container'>
+      <div class="half text-center" (click)="selectVideo()" mdbWavesEffect>
+        <div class="row justify-content-center">
+          <h5>
+            <mat-icon>cloud_upload</mat-icon>
+          </h5>
+        </div>
+        <div class="row justify-content-center">
+          <h6>
+            <span>Upload video</span>
+          </h6>
+        </div>
+      </div>
+
+      <div class="half spererator text-center" (click)='navigateToCreatorSpace()' mdbWavesEffect>
+        <div class="row justify-content-center">
+          <h5>
+            <mat-icon>videocam</mat-icon>
+          </h5>
+        </div>
+        <div class="row justify-content-center">
+          <h6>
+            <span>Creator Space</span>
+          </h6>
+        </div>
+      </div>
+    </mat-card>
+
+    <div class="clearfix"></div>
+    <div >
+      <video class='hide' #videoPreview [src]='videoURL'></video>
+      <mat-card class="app-videos-upload-progress" *ngIf='progress'>
+        <div class="upload-progress" *ngIf='progress'>
+          <div class="title">
+            Uploading <strong>{{file.name}}</strong> - <i>{{progress}}%</i>
+          </div>
+          <mat-progress-bar color="primary" mode="buffer" [value]="progress" bufferValue="0">
+          </mat-progress-bar>
+        </div>
+        <div class="alert alert-success" *ngIf='videoUploaded'>
+          Video has been uploaded successfully.
+        </div>
+      </mat-card>
+    </div>
+    
+
+    <!-- <mat-form-field>
+      <mat-label style='color: #FFF'>Sort By</mat-label>
+      <mat-select (selectionChange)='sortVideos($event.value)'>
+        <mat-select-trigger>
+          <mat-icon>update</mat-icon>&nbsp;Most Recent
+        </mat-select-trigger>
+        <mat-select-trigger>
+          <mat-icon>play_arrow</mat-icon>&nbsp;Most Viewed
+        </mat-select-trigger>
+        <mat-select-trigger>
+          <mat-icon>start</mat-icon>&nbsp;Most Rated
+        </mat-select-trigger>
+        <mat-option value="most-recent">
+          <mat-icon>update</mat-icon>Most Recent
+        </mat-option>
+        <mat-option value="most-viewed">
+          <mat-icon>play_arrow</mat-icon>Most Viewed
+        </mat-option>
+        <mat-option value="most-recent">
+          <mat-icon>star</mat-icon>Most Rated
+        </mat-option>
+      </mat-select>
+    </mat-form-field> -->
+  </div>
+  <div class="options" *ngIf='showOptionsDialog'>
+
+  </div>
+  <div class="app-video-list-item scrollbar-bordered-success thin custom-scroll" (scroll)="onScroll($event)">
+    <div *ngIf='videoService.isLoadingVideos'>
+      <mat-spinner style="margin:0 auto;" mode="indeterminate" diameter="30"></mat-spinner>
+    </div>
+    <div *ngIf='!videoService.isLoadingVideos' >
+      <div *ngFor="let item of videos | filter: searchTitle">
+        <app-video-item [video]="item"></app-video-item>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,46 @@
+mat-card {
+  width: 70%;
+  height: 90px;
+  margin: 20px auto 0 auto;
+}
+
+mat-icon {
+  position: relative;
+  top: 3px;
+  left: -5px;
+}
+
+div.half {
+  float: left;
+  width: 25%;
+  cursor: pointer;
+}
+
+div.spererator {
+  border-left: 1px dashed #dedede;
+}
+
+div.clearfix {
+  clear: both;
+}
+
+.hide {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+div.features ul {
+  font-size: 13px;
+  list-style: none;
+  padding-left: 25px;
+}
+
+div.features ul li::before {
+  content: "\2022";
+  color: #2980b9;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}

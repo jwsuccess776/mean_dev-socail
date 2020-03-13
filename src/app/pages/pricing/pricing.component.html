@@ -1,0 +1,20 @@
+<section>
+  <div class="container">
+    <div class="page-title">
+      <h3>Pricing Guide</h3>
+      <p>Our Platform is free to use for as long as you want.</p>
+      <p>*Prices and features are subject to change anytime.</p>
+    </div>
+
+    <div class="page-body">
+      <div class="row" style='margin: 0 auto' *ngIf='plans.length'>
+        <div class="col-3"></div>
+        <div class='col-3' *ngFor='let plan of plans; let i = index'>
+          <app-pricing-tiers *ngIf='i == 0' [plan]='plan'></app-pricing-tiers>
+          <app-pricing-tiers *ngIf='i != 0' [plan]='plan' [showButton]='1' [previousPlanName]='plans[i - 1].name'>
+          </app-pricing-tiers>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

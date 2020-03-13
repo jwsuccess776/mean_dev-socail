@@ -1,0 +1,52 @@
+<mat-card>
+  <div class="card-title" style="padding-bottom: 0">
+    <mat-icon style='cursor: pointer;' (click)='addProduct()'>add</mat-icon>
+    <span style="position: relative;top: -6px;left: 10px;">Products</span>
+  </div>
+  <div class="card-body">
+    <div>
+      <mat-form-field style="width: 100%">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search...">
+      </mat-form-field>
+      <table mat-table [dataSource]="dataSource" style="width: 100%">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="active">
+          <th mat-header-cell *matHeaderCellDef> Active </th>
+          <td mat-cell *matCellDef="let element"> {{element.active}} </td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef> Type </th>
+          <td mat-cell *matCellDef="let element"> {{element.type }} </td>
+        </ng-container>
+        <ng-container matColumnDef="created">
+          <th mat-header-cell *matHeaderCellDef> Date Created </th>
+          <td mat-cell *matCellDef="let element"> {{element.created | date: 'short'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="options">
+          <th mat-header-cell *matHeaderCellDef> Options </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button>
+              <mat-icon>menu</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </div>
+</mat-card>

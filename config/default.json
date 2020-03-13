@@ -1,0 +1,7 @@
+{
+    "features": {
+      "videos": true,
+      "friends": true,
+      "tiers": true
+    }
+}

@@ -1,0 +1,11 @@
+<mat-sidenav-container>
+  <mat-sidenav-content>
+    <app-header class="sticky" (sidenavToggle)="sidenav.toggle()"></app-header>
+    <mat-sidenav #sidenav role="navigation" (keydown.escape)="sidenav.close()">
+      <app-sidenav-list [user]="user" (sidenavClose)="sidenav.close()"></app-sidenav-list>
+    </mat-sidenav>
+    <div class="wrapper-app" style="background-color: #202235" (click)="sidenav.close()">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
